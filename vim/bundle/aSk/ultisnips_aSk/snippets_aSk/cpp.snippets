@@ -1,0 +1,38 @@
+snippet maincpp
+#include <iostream>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+	${VISUAL}${0}
+
+	return 0;
+}
+endsnippet
+
+snippet co
+cout << ${VISUAL}${0} << endl;
+endsnippet
+
+snippet c'
+cout << "${VISUAL}${0}" << endl;
+endsnippet
+
+snippet cl
+cout << ${VISUAL}${0} << __LINE__ << endl;
+endsnippet
+
+snippet cv
+cout << setw(4) << __LINE__ << " $1: " << ${VISUAL}${1} << endl;
+endsnippet
+
+snippet header
+/*******************************************************************************
+* aSk
+********************************************************************************
+* Date        : ${2:`date +%Y-%m-%d`}
+* Description : ${1:}
+*
+********************************************************************************/
+$0
+endsnippet

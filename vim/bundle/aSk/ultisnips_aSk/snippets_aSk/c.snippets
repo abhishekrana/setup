@@ -1,0 +1,29 @@
+snippet pf
+printf("${VISUAL}${0} \n");
+endsnippet
+
+snippet pfl
+printf("|%4d| ${VISUAL}${0} \n", __LINE__);
+endsnippet
+
+snippet mainc
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+	${VISUAL}${0}
+
+	return 0;
+}
+endsnippet
+
+snippet header
+/*******************************************************************************
+* aSk
+********************************************************************************
+* Date        : ${2:`date +%Y-%m-%d`}
+* Description : ${1:}
+*
+********************************************************************************/
+$0
+endsnippet
