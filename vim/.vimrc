@@ -83,7 +83,7 @@ set ignorecase
 set clipboard=unnamedplus
 
 " show relative line numbers
-set relativenumber 
+"set relativenumber 
 
 
 " }}}
@@ -107,7 +107,8 @@ noremap <leader>[ :cprev<CR>
 noremap <leader>] :cnext<CR>
 
 "noremap <F3> :set relativenumber! <bar> :set nu!<CR>
-noremap <F3> :set relativenumber! \| :set nu!<CR>
+"noremap <F3> :set relativenumber! \| :set nu!<CR>
+noremap <F3> :set nu!<CR>
 noremap <F4> :w<CR>
 inoremap <F4> <ESC>:w<CR>i
 nnoremap <F5> :prev<CR>
@@ -130,6 +131,12 @@ nnoremap <leader>p :set pastetoggle<CR>
 vnoremap <leader>t :Tab /=
 nnoremap <leader>a :Ag -i 
 nnoremap <silent> <leader>A :Ag <cword><CR>
+nnoremap <leader>= gg=G'' :w<CR>
+
+autocmd filetype c nnoremap <leader>m :!gcc % -ggdb -o %:r && ./%:r
+autocmd filetype c nnoremap <leader>g :!gcc % -ggdb -o %:r && gdb -tui %:r<CR>
+autocmd filetype cpp nnoremap <leader>m :!g++ % -ggdb -o %:r && ./%:r
+autocmd filetype cpp nnoremap <leader>g :!g++ % -ggdb -o %:r && gdb -tui %:r<CR>
 
 " Fugitive Shortcuts:
 nmap <silent> <leader>gs :Gstatus<cr>
@@ -208,6 +215,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/Solarized'
 Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'hari-rangarajan/CCTree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
@@ -228,6 +236,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/gdbmgr'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'majutsushi/tagbar'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'benmills/vimux'
+"Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'weynhamz/vim-plugin-minibufexpl'
 "Plugin 'bling/vim-bufferline'
@@ -421,6 +432,10 @@ let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#fnamemod = ':t:.'
+
+" Airline + Tmux
+let g:airline#extensions#tmuxline#enabled = 0
+let g:tmuxline_powerline_separators = 0
 
 let g:airline_theme = 'bubblegum'
 "let g:airline_theme = 'murmur'
@@ -621,6 +636,19 @@ let g:syntastic_warning_symbol = "⚠"
 
 " }}}
 
+" Commentry {{{
+"""""""""""""""""""""""""""""""""""""""""""
+" Commentry 
+"""""""""""""""""""""""""""""""""""""""""""
+" CONFIG:
+autocmd FileType c setlocal commentstring=//\ %s
+autocmd FileType cpp setlocal commentstring=//\ %s
+
+" HELP:
+" 
+
+" }}}
+
 " Taboo {{{
 """""""""""""""""""""""""""""""""""""""""""
 " Taboo 
@@ -661,7 +689,7 @@ let g:syntastic_warning_symbol = "⚠"
 " YouCompleteMe 
 """""""""""""""""""""""""""""""""""""""""""
 " CONFIG:
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_register_as_syntastic_checker = 0
 
@@ -690,7 +718,7 @@ let g:ycm_register_as_syntastic_checker = 0
 """""""""""""""""""""""""""""""""""""""""""
 " CONFIG:
 "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>""
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/aSk/ultisnips_aSk/snippets_aSk"
@@ -785,6 +813,24 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " HELP:
 " g:tagbar_autoclose setting to open the Tagbar window, jump to it
 " and have it close automatically on tag selection
+"
+
+" }}}
+
+" Tmux-Navigator {{{
+"""""""""""""""""""""""""""""""""""""""""""
+" Tmux-Navigator
+"""""""""""""""""""""""""""""""""""""""""""
+" CONFIG:
+"let g:tmux_navigator_no_mappings = 1
+"nnoremap <silent> <c-H> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <c-J> :TmuxNavigateDown<cr>
+"nnoremap <silent> <c-K> :TmuxNavigateUp<cr>
+"nnoremap <silent> <c-L> :TmuxNavigateRight<cr>
+"nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+"let g:tmux_navigator_save_on_switch = 1
+
+" HELP:
 "
 
 " }}}
@@ -1127,8 +1173,8 @@ nnoremap <C-y> 3<C-y>
 "@@            : repeat
 "
 ":g/^\s*$/d       : delete all blank lines
-":g/green/d       : delete all lines containing "green"
-":v/green/d       : delete all lines not containing "green"
+":g/green/d       : delete all lines containing green
+":v/green/d       : delete all lines not containing green
 "
 "
 "REMEMBER
@@ -1152,6 +1198,10 @@ nnoremap <C-y> 3<C-y>
 "
 ":UltiSnipsEdit
 " vnoremap <leader>t :Tab /=
+"
+"Check if key already has Mapping
+"verbose map <C-k>
+"
 "
 
 
