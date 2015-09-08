@@ -20,6 +20,9 @@ if [[ "$1" == "push" ]];then
 	mkdir -p ~/.vim/bundle/aSk/
 	rsync -av vim/bundle/aSk/ ~/.vim/bundle/aSk/
 
+	echo "Syncing .tmux.conf"
+	rsync -av tmux/.tmux.conf ~/
+
 	if [[ ! -f ~/.vim/bundle/Vundle.vim ]];then
 		echo "Cloning Vundle Plugin"
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -41,6 +44,9 @@ elif [[ "$1" == "pull" ]];then
 	
 	echo "Syncing aSk"
 	rsync -av ~/.vim/bundle/aSk/ vim/bundle/aSk/
+
+	echo "Syncing .tmux.conf"
+	rsync -av ~/.tmux.conf tmux/
 
 
 elif [[ "$1" == "update" ]];then
