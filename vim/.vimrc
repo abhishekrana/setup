@@ -128,10 +128,12 @@ nnoremap <leader>j :bprev<CR>
 nnoremap <leader>k :bnext<CR>
 nnoremap <leader>b :buffers<CR>:buffer<Space>
 nnoremap <leader>p :set pastetoggle<CR>
+"nnoremap <leader>p :setlocal paste!<cr>
 vnoremap <leader>t :Tab /=
 nnoremap <leader>a :Ag -i 
 nnoremap <silent> <leader>A :Ag <cword><CR>
 nnoremap <leader>= gg=G'' :w<CR>
+nnoremap <leader>c ciw
 
 autocmd filetype c nnoremap <leader>m :!gcc % -ggdb -o %:r && ./%:r
 autocmd filetype c nnoremap <leader>g :!gcc % -ggdb -o %:r && gdb -tui %:r<CR>

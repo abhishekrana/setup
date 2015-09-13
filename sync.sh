@@ -11,22 +11,27 @@
 if [[ "$1" == "push" ]];then
 	echo ""
 	echo "Deploying..."
-	echo ""
 
+
+	# vim
+	echo ""
 	echo "Syncing .vimrc"
-	rsync -av vim/.vimrc ~/
+	rsync -a vim/.vimrc ~/
 	
 	echo "Syncing bundle/aSk"
 	mkdir -p ~/.vim/bundle/aSk/
-	rsync -av vim/bundle/aSk/ ~/.vim/bundle/aSk/
+	rsync -a vim/bundle/aSk/ ~/.vim/bundle/aSk/
 
-	echo "Syncing .tmux.conf"
-	rsync -av tmux/.tmux.conf ~/
-
-	if [[ ! -f ~/.vim/bundle/Vundle.vim ]];then
+	if [[ ! -d ~/.vim/bundle/Vundle.vim ]];then
 		echo "Cloning Vundle Plugin"
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	fi
+
+
+	# tmux
+	echo ""
+	echo "Syncing .tmux.conf"
+	rsync -a tmux/.tmux.conf ~/
 
 	if [[ ! -d ~/.tmux/plugins/tpm ]];then
 		echo "Cloning Tmux Plugin Manager"
@@ -34,19 +39,45 @@ if [[ "$1" == "push" ]];then
 	fi
 
 
+	# Bash
+	echo ""
+	echo "Syncing .bashrc_aSk"
+	rsync -a bash/.bashrc_aSk ~/
+
+	grep "bashrc_aSk" ~/.bashrc > /dev/null
+	if [[ $? == 1 ]];then
+		echo "" >> ~/.bashrc
+		echo "# aSk" >> ~/.bashrc
+		echo "source ~/.bashrc_aSk" >> ~/.bashrc
+	fi
+
+
 elif [[ "$1" == "pull" ]];then
+
+	echo "Are you sure? (y/n)"
+	read input
+	if [[ $input != "y" ]];then
+		exit 0
+	fi
+
 	echo ""
 	echo "Updating Git Repository..."
 	echo ""
 
+
+	# vim
+	echo ""
 	echo "Syncing .vimrc"
-	rsync -av ~/.vimrc vim/
+	rsync -a ~/.vimrc vim/
 	
 	echo "Syncing aSk"
-	rsync -av ~/.vim/bundle/aSk/ vim/bundle/aSk/
+	rsync -a ~/.vim/bundle/aSk/ vim/bundle/aSk/
 
+
+	# tmux
+	echo ""
 	echo "Syncing .tmux.conf"
-	rsync -av ~/.tmux.conf tmux/
+	rsync -a ~/.tmux.conf tmux/
 
 
 elif [[ "$1" == "update" ]];then
@@ -64,6 +95,11 @@ elif [[ "$1" == "update" ]];then
 	echo "Upgrading vim"
 	#sudo apt-get upgrade -y vim
 	sudo apt-get install -y vim=2:7.4.843-1~ppa1~t
+
+	echo "Installing bash-completion"
+	sudo apt-get install -y bash-completion
+	echo "TODO: For bash-completion, edit the prompt line in .bashrc : export PS1='\$(__git_ps1) \w\$'"
+
 	
 else
 	echo ""
