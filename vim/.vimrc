@@ -7,7 +7,7 @@
 " Select text and press gq to wrap the text to 80 chars width
 " Wrap text to 80 characters as white space allows without exceeding the 80
 " character limit.
-set textwidth=80
+" set textwidth=80
 set formatoptions+=t
 
 inoremap jk <esc>
@@ -721,7 +721,8 @@ let g:ycm_register_as_syntastic_checker = 0
 " CONFIG:
 "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>""
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/aSk/ultisnips_aSk/snippets_aSk"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "../aSk/ultisnips_aSk/snippets_aSk"]

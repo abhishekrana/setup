@@ -28,6 +28,17 @@ snippet cv
 cout << setw(4) << __LINE__ << " $1: " << ${VISUAL}${1} << endl;
 endsnippet
 
+snippet cvv
+cout << " $1: " << ${VISUAL}${1} << endl;
+endsnippet
+
+snippet if
+if($1)
+{
+	$2
+}
+endsnippet
+
 snippet header
 /*******************************************************************************
 * aSk

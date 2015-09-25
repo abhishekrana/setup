@@ -1,4 +1,16 @@
-### Alias ###
+### Bash Scripts
+if [ -f /etc/bash_completion ];then
+	. /etc/bash_completion
+fi
+
+if [ -f /etc/bash_completion ];then
+	source ~/.git-prompt.sh
+fi
+
+# PS1='${debian_chroot:+($debian_chroot)}\u@\h:\$(__git_ps1)\w\$ '
+PS1='${debian_chroot:+($debian_chroot)}\u:$(__git_ps1)\w\$ '
+
+### Alias
 # To temporarily bypass an alias, we preceed the command with a \
 # Eg: the ls command is aliased, but to use the normal ls command you would type \ls
 
@@ -7,6 +19,7 @@ alias l='ls --color=auto'
 alias ls='ls --color=auto'
 alias lt='ls -lrth'
 alias c='clear'
+alias cl='clear;ls --color=auto'
 alias rm='rm -iv'
 alias mkdir='mkdir -p'
 alias vi='vim'
@@ -23,7 +36,4 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 
-# Bash Scripts
-if [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-fi
+
