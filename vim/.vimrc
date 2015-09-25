@@ -101,8 +101,8 @@ map <space><space> <leader><leader>
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 nnoremap <leader>f :call QuickfixToggle()<cr>
-nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
-vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+" nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+" vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 noremap <leader>[ :cprev<CR>
 noremap <leader>] :cnext<CR>
 
@@ -152,6 +152,8 @@ set ssop-=folds      " do not store folds
 nnoremap <leader>s :mksession ./mysession.vim
 
 nnoremap <leader><leader> :call KeyScrollToggle()<CR>
+
+nnoremap <leader>n :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 inoremap <C-h> <Esc>i
 inoremap <C-l> <Esc>la
@@ -686,19 +688,6 @@ autocmd FileType cpp setlocal commentstring=//\ %s
 
 " }}}
 
-" YouCompleteMe {{{
-"""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe 
-"""""""""""""""""""""""""""""""""""""""""""
-" CONFIG:
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_register_as_syntastic_checker = 0
-
-" HELP:
-
-" }}}
-
 " Multicursors {{{
 """""""""""""""""""""""""""""""""""""""""""
 " Multicursors 
@@ -756,10 +745,21 @@ endif
 """""""""""""""""""""""""""""""""""""""""""
 " CONFIG:
 "let g:ycm_global_ycm_extra_conf = \"~/.vim/bundle/aSk/YouCompleteMe_aSk/cpp/.ycm_extra_conf.py\"
-"let g:ycm_global_ycm_extra_conf = \"/home/abhishek/temp/prog/.ycm_extra_conf.py\"
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 " Disable user confirmation to load python file
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_register_as_syntastic_checker = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" Open Preview Window at bottom
+set splitbelow
+" ctags --fields=+l // ctags should be exuberant ctags
+let g:ycm_collect_identifiers_from_tags_files = 1
+" Set to 0 if using Syntastic
+let g:ycm_show_diagnostics_ui = 1
+" To disable preview window
+" set completeopt-=preview
+" let g:ycm_add_preview_to_completeopt = 0
 
 " HELP:
 "sudo apt-get install vim
