@@ -36,4 +36,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 
+# Map CAPSLock to Control
+#You can put this command in your ~/.xsession, ~/.gnomerc or whatever. I
+setxkbmap -layout "$(setxkbmap -print | awk -F + '/xkb_symbols/ {print $2}')" -option ctrl:nocaps
 
