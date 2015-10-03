@@ -36,4 +36,12 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 
+# Map CAPSLock to Control
+#You can put this command in your ~/.xsession, ~/.gnomerc or whatever. I
+#caps:numlock – Caps Lock becomes an additional Num Lock.
+#caps:swapescape – Caps Lock becomes Escape, and Escape becomes Caps Lock
+#caps:escape – Caps Lock becomes an additional Escape.
+#caps:backspace – Caps Lock becomes an additional Backspace.
+#caps:super – Caps Lock becomes an additional Super. (Super is also known as the Windows key.)
+setxkbmap -layout "$(setxkbmap -print | awk -F + '/xkb_symbols/ {print $2}')" -option ctrl:nocaps
 

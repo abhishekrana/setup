@@ -268,6 +268,15 @@ elif [[ "$1" == "update" ]];then
 	if [[ $? != 0 ]];then
 		echo "Installing Zim"
 		sudo apt-get install -y zim
+
+		# Upgrade Zim
+		wget http://zim-wiki.org/downloads/zim_0.63_all.deb -O zim_0.63_all.deb
+		dpkg -i zim_0.63_all.deb
+		rm -f zim_0.63_all.deb
+
+		# Source View Plugin
+		sudo apt-get install -y python-gtksourceview2
+
 	else
 		echo "Zim already installed"
 	fi
