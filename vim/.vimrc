@@ -242,6 +242,7 @@ Plugin 'rdnetto/YCM-Generator'
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
+Plugin 'tpope/vim-unimpaired'
 "Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'fholgado/minibufexpl.vim'
 "Plugin 'weynhamz/vim-plugin-minibufexpl'
@@ -369,7 +370,7 @@ let g:EasyMotion_smartcase = 1
 "set background=dark
 set background=light
 
-"colorscheme solarized
+" colorscheme solarized
 "colorscheme mayansmoke
 "colorscheme molokai
 
@@ -760,6 +761,9 @@ let g:ycm_show_diagnostics_ui = 1
 " To disable preview window
 " set completeopt-=preview
 " let g:ycm_add_preview_to_completeopt = 0
+" The only supported tag format is the Exuberant Ctags format
+" tags needs to be called with the '-- fields=+l' option
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " HELP:
 "sudo apt-get install vim
@@ -789,6 +793,81 @@ let g:ycm_show_diagnostics_ui = 1
 "found, it is loaded (only once!) as a Python module. YCM calls a FlagsForFile
 "method in that module which should provide it with the information necessary to
 "compile the current file.
+"
+" INSTALL YCM:
+" These 2 command should have net access
+" git clone https://github.com/Valloric/YouCompleteMe
+" cd ycm
+" git subversion --recursive	// something like this command to download
+"								// latest thirdparty packages
+"
+" Install cmake latest version with 
+" --prefix DIR					// to install in DIR
+" Use export PATH=DIR:$PATH to use new version of cmake inside DIR
+"
+" Download clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz and copy
+" inside third-party inside YCM Plugin
+"
+" Update gcc (for c++11 support if needed)
+"
+" /install.sh --clang-completer
+"
+" Add similar lines in (to access header files autocompletion)
+" ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py
+"
+" './tests/gmock/include',
+" '-I',
+" '/usr/include/clang/3.4/include',
+" '-I',
+" '/usr/include/c++/4.8.4',
+" '-I',
+" '/usr/include',
+" '-I',
+" '/usr/include/linux',
+" '-I',
+" '/usr/include/',
+" '-I',
+" '/usr/include/arpa',
+" '-I',
+" '/usr/include/c++/4.8.4',
+" '-I',
+" '/usr/include/c++/4.8.4/backward',
+" '-I',
+" '/usr/include/c++/4.8.4/bits',
+" '-I',
+" '/usr/include/c++/4.8.4/debug',
+" '-I',
+" '/usr/include/c++/4.8.4/tr1',
+" '-I',
+" '/usr/include/clang',
+" '-I',
+" '/usr/include/clang/3.4/include',
+" '-I',
+" '/usr/include/linux',
+" '-I',
+" '/usr/include/net',
+" '-I',
+" '/usr/include/netinet',
+" '-I',
+" '/usr/include/openssl',
+" '-I',
+" '/usr/include/sys',
+" '-I',
+" '/usr/include/x86_64-linux-gnu',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/asm',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/bits',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/c++/4.8/bits',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/c++/4.8/ext',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/gnu',
+" '-I',
+" '/usr/include/x86_64-linux-gnu/sys',
+"   ]
+"
 "
 " }}}
 
@@ -1206,6 +1285,50 @@ nnoremap <C-y> 3<C-y>
 "verbose map <C-k>
 "
 "
+" Paste after deleting work
+" yiw "0P
+" yank register			: "0
+" :reg
+"
+" yank word		: viwy
+" replace word	: viwp
+" 
+" viwy
+" ciw Ctrl+r 0 ESC
+" or
+" ciw Ctrl+r Ctrl+o 0 ESC
+" n for next
+" .
+"
+"
+" yank to register a	: "ayy
+" Append to register a	: "Ayy
+" :reg a
+" Clear register		: qaq
+"
+" To paste code without indentation issue
+" :put +
+" 
+"
+" # NEOVIM
+" ln -s ~/.vimrc ~/.nvimrc
+" ln -s ~/.vim ~/.nvim
+" alias vim="nvim"
+"
+"
+" I insert at the begin.
+" A append to end.
+" g; jump back to last edited position.
+" C change remaining part of line.
+" gi	Go to last edited location
+"
+"
+"
+" Movement:
+" 1. The w, b, e, and ge commands allow us to move forward or backward to the
+"	 start or end of a word. The W, B, E, and gE commands do the same for a WORD
+" 2. The f, F, t, T, ;, and , commands make up the suite of character search
+"	 motions.
 
 
 

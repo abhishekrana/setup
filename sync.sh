@@ -63,6 +63,10 @@ if [[ "$1" == "push" ]];then
 
 	echo "bash-completion:"
 	echo "Edit the prompt line in .bashrc : export PS1='\$(__git_ps1) \w\$'"
+	echo ""
+
+	echo "Update vim Plugins"
+	echo ":PluginUpdate"
 
 
 elif [[ "$1" == "pull" ]];then
@@ -103,8 +107,9 @@ elif [[ "$1" == "update" ]];then
 	dpkg -p tmux > /dev/null 2>&1
 	if [[ $? != 0 ]];then
 		echo "Adding Repo for Tmux"
-		sudo add-apt-repository -y ppa:pi-rho/dev
-		sudo apt-get install -y python-software-properties software-properties-common
+		#Creates issues with YCM as vim in this ppa does not have python
+		#sudo add-apt-repository -y ppa:pi-rho/dev
+		#sudo apt-get install -y python-software-properties software-properties-common
 	fi
 	# Variety
 	dpkg -p variety > /dev/null 2>&1
