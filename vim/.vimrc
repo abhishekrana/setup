@@ -115,6 +115,8 @@ nnoremap <F5> :prev<CR>
 nnoremap <F6> :next<CR>
 noremap <F7> :tabprev<CR>
 noremap <F8> :tabnext<CR>
+noremap <F10> ::!ctags -R --c++-kinds=+p --fields=+iaSl --extra=+q; find . -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" > cscope.files; cscope -q -R -b -i cscope.files <CR>
+noremap <C-F10> :CCTreeLoadDB cscope.out<CR>
 inoremap <C-k> <Up>
 noremap <S-l> <ESC>$
 noremap <S-h> <ESC>^
@@ -474,6 +476,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 let g:CCTreeOrientation = "leftabove"
 let g:CCTreeWindowVertical = 1
 let g:CCTreeRecursiveDepth = 10
+let g:CCTreeLoadDB = "cscope.out"
 
 " g:CCTreeWindowHeight, default is -1.
 " g:CCTreeWindowMinWidth = 40.
@@ -890,11 +893,16 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " Tagbar
 """""""""""""""""""""""""""""""""""""""""""
 " CONFIG:
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
 nnoremap <silent> <F9> :TagbarToggle<CR>
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType c,cpp,h,hpp nested :TagbarOpen
 
 " HELP:
 " g:tagbar_autoclose setting to open the Tagbar window, jump to it
 " and have it close automatically on tag selection
+" Press x to expand window
 "
 
 " }}}
